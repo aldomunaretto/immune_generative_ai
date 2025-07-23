@@ -44,3 +44,4 @@ ollama
 accelerate
 bitsandbytes
 selenium
+lmstudio
