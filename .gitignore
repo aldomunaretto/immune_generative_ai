@@ -208,3 +208,6 @@ __marimo__/
 
 # Generated Images
 *.png
+
+# Gradio Interface
+.gradio/
