@@ -106,6 +106,7 @@ A continuación se listan algunos de los LLMs open source más destacados y actu
 
 ### 📖 Documentación y APIs
 
+- [Documentación oficial de Ollama](https://ollama.com/library) – Uso, modelos y configuración de Ollama.
 - [Guía de la API de Ollama](../../wiki/ollama_api)  
 - [SDK de Python para Ollama](../../wiki/ollama_python_sdk)
 - [Creación y uso de Modelfile en Ollama](../../wiki/ollama_modelfile)
@@ -172,7 +173,7 @@ Con unas pocas líneas de código puedes desplegar una interfaz intuitiva y comp
 ## 🔗 Recursos adicionales
 
 ### 📚 Documentación y Comparativas
-- [📖 Documentación oficial de Ollama](https://ollama.com/library) – Uso, modelos y configuración de Ollama.
+
 - [📊 Hugging Face Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) – Comparativa actualizada de modelos open-source.
 - [🧠 Awesome Open LLMs](https://github.com/Hannibal046/Awesome-LLMs) – Lista curada de modelos, datasets y herramientas.
 - [🧪 Hugging Face Hub](https://huggingface.co/models) – Repositorio central de modelos preentrenados y datasets para IA generativa, NLP, visión y más.
