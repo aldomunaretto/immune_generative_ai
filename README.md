@@ -14,9 +14,8 @@ Este repositorio tiene como objetivo introducir los fundamentos de la **Intelige
 - [🧰 Ollama](#-ollama)
 - [🖥️ LM Studio](#-lm-studio)
 - [🧩 AnythingLLM](#-anythingllm)
-- [🌐 Gradio](#-gradio)
 - [📚 Msty](#-msty)
-- [💬 Interacción con Ollama](#-interacción-con-ollama)
+- [🌐 Gradio](#-gradio)
 - [🔗 Recursos adicionales](#-recursos-adicionales)
 
 ---
@@ -105,16 +104,10 @@ A continuación se listan algunos de los LLMs open source más destacados y actu
 - Docker NO es necesario
 - CPU moderna o GPU con soporte para aceleración (opcional)
 
-### Instrucciones
+### 📖 Documentación y APIs
 
-1. Descarga e instala Ollama desde la página oficial:
-   - https://ollama.com/download
-
-2. Verifica la instalación ejecutando en tu terminal:
-
-   ```bash
-   ollama --version
-   ````
+- [Guía de la API de Ollama](../../wiki/ollama_api.md)  
+- [SDK de Python para Ollama](../../wiki/ollama_python_sdk.md)
 
 ---
 
@@ -148,19 +141,6 @@ Una solución ideal para construir un **chat corporativo privado**, motores de b
 
 ---
 
-## 🌐 Gradio
-
-[Gradio](https://www.gradio.app/) es una librería de Python que permite construir interfaces web para modelos de machine learning y deep learning en minutos. Ideal para prototipos, demos y validación con usuarios.
-
-**Usos principales:**
-- Crear formularios o chatbots con LLMs.
-- Visualizar outputs de modelos de imagen, audio o NLP.
-- Integrar con Hugging Face Spaces o notebooks.
-
-Con unas pocas líneas de código puedes desplegar una interfaz intuitiva y compartible con cualquier persona.
-
----
-
 ## 📚 Msty
 
 [Msty](https://msty.app/) es una herramienta especializada en la **visualización y análisis interno** de modelos de lenguaje.  
@@ -172,6 +152,19 @@ Te permite explorar:
 - **Probabilidades de predicción** token a token
 
 Ideal para investigadores, educadores y quienes quieren entender cómo "piensa" un modelo. Msty puede ayudarte a explicar errores, mejorar prompts o hacer debugging de outputs inesperados.
+
+---
+
+## 🌐 Gradio
+
+[Gradio](https://www.gradio.app/) es una librería de Python que permite construir interfaces web para modelos de machine learning y deep learning en minutos. Ideal para prototipos, demos y validación con usuarios.
+
+**Usos principales:**
+- Crear formularios o chatbots con LLMs.
+- Visualizar outputs de modelos de imagen, audio o NLP.
+- Integrar con Hugging Face Spaces o notebooks.
+
+Con unas pocas líneas de código puedes desplegar una interfaz intuitiva y compartible con cualquier persona.
 
 ---
 
