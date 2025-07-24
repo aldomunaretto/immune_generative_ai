@@ -106,7 +106,8 @@ A continuación se listan algunos de los LLMs open source más destacados y actu
 
 ### 📖 Documentación y APIs
 
-- [Documentación oficial de Ollama](https://ollama.com/library) – Uso, modelos y configuración de Ollama.
+- [Repositorio de GitHub](https://github.com/ollama/ollama)
+- [Documentación oficial de Ollama](https://github.com/ollama/ollama/tree/main/docss)
 - [Guía de la API de Ollama](../../wiki/ollama_api)  
 - [SDK de Python para Ollama](../../wiki/ollama_python_sdk)
 - [Creación y uso de Modelfile en Ollama](../../wiki/ollama_modelfile)
