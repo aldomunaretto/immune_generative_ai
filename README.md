@@ -10,12 +10,17 @@ Este repositorio tiene como objetivo introducir los fundamentos de la **Intelige
 - [📚 ¿Qué son los LLMs?](#-qué-son-los-llms)
 - [🏢 Proveedores Comerciales de LLMs](#-proveedores-comerciales-de-llms)
 - [🌍 Modelos de Código Abierto (actualizado 2025)](#-modelos-de-código-abierto-actualizado-2025)
+- [📝 Context Engineering](#-context-engineering)
+- [🎯 Fine-tuning](#-fine-tuning)
+- [📂 Retrieval-Augmented Generation (RAG)](#-retrieval-augmented-generation-rag)
 - [🤗 Hugging Face](#-hugging-face)
 - [🧰 Ollama](#-ollama)
 - [🖥️ LM Studio](#-lm-studio)
 - [🧩 AnythingLLM](#-anythingllm)
 - [📚 Msty](#-msty)
 - [🌐 Gradio](#-gradio)
+- [📊 Streamlit](#-streamlit)
+- [🗣️ ElevenLabs](#️-elevenlabs)
 - [🔗 Recursos adicionales](#-recursos-adicionales)
 
 ---
@@ -70,6 +75,61 @@ A continuación se listan algunos de los LLMs open source más destacados y actu
 | **Mistral**      | Mistral AI         | 7B, Mixtral (12.7B MoE) | Mistral 7B / Mixtral 8x7B | Apache 2.0 |
 | **Falcon**       | TII (UAE)          | 7B, 180B             | Falcon 180B    | Apache 2.0     |
 | **Command-R**    | Cohere             | 35B                  | Command-R+     | RAIL           |
+
+---
+
+## 📝 Context Engineering
+
+El **Context Engineering** consiste en diseñar cuidadosamente los *prompts* y la información de entrada para optimizar las respuestas de un LLM sin necesidad de modificar sus pesos. 
+Se centra en:
+- Estructuración de *prompts* y *templates*.
+- Inserción de *context windows* con ejemplos o instrucciones previas.
+- Uso de técnicas como **Chain-of-Thought (CoT)**, **Few-Shot Prompting** y **ReAct**.
+
+🔧 **Librerías comunes**:
+- [DSPy](https://github.com/stanfordnlp/dspy) (Framework para context engineering basado en programas declarativos)
+- [Guidance](https://github.com/microsoft/guidance)
+- [Promptify](https://github.com/promptslab/Promptify)
+
+---
+
+## 🎯 Fine-tuning
+
+El **Fine-tuning** es el proceso de ajustar los parámetros de un modelo previamente entrenado usando un conjunto de datos específico para una tarea concreta. 
+Se utiliza para:
+- Mejorar rendimiento en dominios especializados.
+- Adaptar el estilo o formato de salida.
+- Crear *instruction-tuned models* para casos concretos.
+
+🔧 **Librerías y frameworks**:
+- [Hugging Face Transformers](https://huggingface.co/transformers)
+- [PEFT](https://github.com/huggingface/peft) (Parameter Efficient Fine-Tuning)
+- [LoRA](https://github.com/microsoft/LoRA)
+- [TRL (Transformer Reinforcement Learning)](https://github.com/huggingface/trl)
+- [🦥 Unsloth](https://unsloth.ai/) (Framework optimizado para fine-tuning rápido y eficiente)
+    - [🐙 GitHub Repository](https://github.com/unslothai/unsloth)
+    - [🤗 Hugging Face Organization Card](https://huggingface.co/unsloth)
+
+---
+
+## 📂 Retrieval-Augmented Generation (RAG)
+
+El **RAG** combina la generación de texto con la recuperación de información externa en tiempo real. 
+En lugar de confiar solo en el conocimiento interno del LLM, **recupera documentos relevantes** y los pasa como contexto al modelo antes de generar la respuesta.
+
+🔧 **Librerías comunes**:
+- [LangChain](https://www.langchain.com/)
+- [LangGraph](https://www.langgraph.dev/) 
+- [LlamaIndex](https://www.llamaindex.ai/)
+- [Haystack](https://haystack.deepset.ai/)
+- [Pinecone](https://www.pinecone.io/) (vector DB)
+- [Weaviate](https://weaviate.io/) (vector DB)
+- [Chroma](https://www.trychroma.com/) (vector DB)
+
+**Casos de uso**:
+- Chatbots empresariales con documentos privados.
+- Búsqueda semántica combinada con LLMs.
+- Sistemas de soporte y asistencia con información actualizada.
 
 ---
 
@@ -171,22 +231,52 @@ Con unas pocas líneas de código puedes desplegar una interfaz intuitiva y comp
 
 ---
 
+## 📊 Streamlit
+
+[Streamlit](https://streamlit.io) es un framework en Python para crear **aplicaciones web interactivas de forma rápida**, ideal para prototipar interfaces con modelos de IA.
+
+### 🔧 Características clave
+- Interfaz muy sencilla basada en Python puro (sin necesidad de HTML/CSS/JS).
+- Ideal para dashboards, demos de modelos y visualización de datos.
+- Integración directa con librerías como `pandas`, `plotly`, `matplotlib` y APIs de LLMs.
+- Permite desplegar aplicaciones fácilmente en la nube mediante [Streamlit Community Cloud](https://streamlit.io/cloud).
+
+---
+
+## 🗣️ ElevenLabs
+
+[ElevenLabs](https://elevenlabs.io) es una plataforma líder en **generación de voz mediante IA**.  
+Permite crear voces sintéticas realistas en múltiples idiomas y estilos, siendo ampliamente usada para aplicaciones de:
+
+- **Narración de audiolibros y podcasts.**
+- **Generación de diálogos en videojuegos.**
+- **Conversión de texto a voz (TTS) en asistentes virtuales.**
+- **Creación de personajes con voces personalizadas.**
+
+### 🔧 Características clave
+- Modelos de voz de alta fidelidad y expresividad.
+- Soporte multilingüe y clonación de voz.
+- API sencilla para integraciones en aplicaciones web y móviles.
+- Planes de uso gratuito y de pago según volumen de caracteres.
+
+### 📚 Librerías y SDKs
+- [ElevenLabs Python SDK](https://pypi.org/project/elevenlabs/)
+- API REST para integración con cualquier lenguaje.
+- Plugins y conectores para aplicaciones de contenido multimedia.
+
+---
+
 ## 🔗 Recursos adicionales
 
 ### 📚 Documentación y Comparativas
 
-- [📊 Hugging Face Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) – Comparativa actualizada de modelos open-source.
+- [🤗 Hugging Face Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) – Comparativa actualizada de modelos open-source.
 - [🧠 Awesome Open LLMs](https://github.com/Hannibal046/Awesome-LLMs) – Lista curada de modelos, datasets y herramientas.
-- [🧪 Hugging Face Hub](https://huggingface.co/models) – Repositorio central de modelos preentrenados y datasets para IA generativa, NLP, visión y más.
+- [🤗 Hugging Face Hub](https://huggingface.co/models) – Repositorio central de modelos preentrenados y datasets para IA generativa, NLP, visión y más.
 
 ### ⚙️ Frameworks y Librerías
-- [📦 LlamaIndex](https://www.llamaindex.ai/) – Framework para crear aplicaciones de RAG (Retrieval-Augmented Generation).
-- [🔁 LangGraph](https://www.langgraph.dev/) – Framework para flujos conversacionales multiestado con LLMs.
 - [🧪 LangChain](https://www.langchain.com/) – Orquestación de agentes y flujos con LLMs, APIs y herramientas externas.
+- [🔁 LangGraph](https://www.langgraph.dev/) – Framework para flujos conversacionales multiestado con LLMs.
+- [📦 LlamaIndex](https://www.llamaindex.ai/) – Framework para crear aplicaciones de RAG (Retrieval-Augmented Generation).
 - [🤗 Transformers (Hugging Face)](https://huggingface.co/docs/transformers/index) – Librería para el uso de modelos de lenguaje en Python.
 
-### 🛠️ Herramientas Locales y UI
-- [🖥️ LM Studio](https://lmstudio.ai/) – Interfaz gráfica para descargar, ejecutar y chatear con LLMs localmente.
-- [🧩 EverythingLLM](https://github.com/Evanz111/EverythingLLM) – Plataforma local y extensible para construir soluciones empresariales con LLMs.
-- [🌐 Gradio](https://www.gradio.app/) – Crear interfaces web interactivas para modelos ML/LLM en minutos.
-- [📚 Msty](https://github.com/linonetwo/msty) – Visualización y análisis de tokens, embeddings y procesos internos de los LLMs.
