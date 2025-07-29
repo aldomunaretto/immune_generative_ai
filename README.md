@@ -106,9 +106,12 @@ Se utiliza para:
 - [PEFT](https://github.com/huggingface/peft) (Parameter Efficient Fine-Tuning)
 - [LoRA](https://github.com/microsoft/LoRA)
 - [TRL (Transformer Reinforcement Learning)](https://github.com/huggingface/trl)
+- [H2O LLM Studio](https://github.com/h2oai/h2o-llmstudio)
 - [🦥 Unsloth](https://unsloth.ai/) (Framework optimizado para fine-tuning rápido y eficiente)
     - [🐙 GitHub Repository](https://github.com/unslothai/unsloth)
     - [🤗 Hugging Face Organization Card](https://huggingface.co/unsloth)
+- [🦙 LLaMA-Factory](https://llamafactory.readthedocs.io/en/latest/)
+    - [🐙 GitHub Repository](https://github.com/hiyouga/LLaMA-Factory)
 
 ---
 
@@ -280,3 +283,22 @@ Permite crear voces sintéticas realistas en múltiples idiomas y estilos, siend
 - [📦 LlamaIndex](https://www.llamaindex.ai/) – Framework para crear aplicaciones de RAG (Retrieval-Augmented Generation).
 - [🤗 Transformers (Hugging Face)](https://huggingface.co/docs/transformers/index) – Librería para el uso de modelos de lenguaje en Python.
 
+### Datasets para entrenamiento y ajuste fino (Fine-Tuning) de LLMs
+- [The Pile](https://pile.eleuther.ai/)
+- [HelpSteer: Helpfulness SteerLM Dataset](https://huggingface.co/datasets/nvidia/HelpSteer)
+- [No Robots](https://huggingface.co/datasets/HuggingFaceH4/no_robots)
+- [Anthropic_HH_Golden](https://huggingface.co/datasets/Unified-Language-Model-Alignment/Anthropic_HH_Golden)
+- [Trelis Function Calling Dataset](https://huggingface.co/datasets/Trelis/function_calling_extended)
+- [Dolma](https://huggingface.co/datasets/allenai/dolma)
+- [Open-Platypus](https://huggingface.co/datasets/garage-bAInd/Open-Platypus)
+- [Puffin](https://huggingface.co/datasets/LDJnr/Puffin)
+
+### Personas de Interes
+- [Maxime Labonne]()
+    - [🐙 GitHub Repository](https://mlabonne.github.io/blog/)
+    - [🤗 Hugging Face Page](https://huggingface.co/mlabonne)
+    - [LLM Engineer's Handbook](https://github.com/PacktPublishing/LLM-Engineers-Handbook)
+- [Colin Kealty (Bartowski)](https://x.com/bartowski1182)
+    - [🐙 GitHub Repository](https://github.com/bartowski1182)
+    - [🤗 Hugging Face Page](https://huggingface.co/bartowski)
+    - [🤗 Hugging Face LM Studio Community Page](https://huggingface.co/lmstudio-community)
