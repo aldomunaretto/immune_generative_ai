@@ -56,3 +56,4 @@ fastembed
 pikepdf
 sentence-transformers
 elevenlabs
+dspy
