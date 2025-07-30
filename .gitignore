@@ -216,4 +216,4 @@ __marimo__/
 .DS_Store
 
 # Vector Database
-db/vector_db/
+chroma_db/
