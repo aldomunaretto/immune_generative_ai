@@ -86,8 +86,16 @@ Se centra en:
 - Inserción de *context windows* con ejemplos o instrucciones previas.
 - Uso de técnicas como **Chain-of-Thought (CoT)**, **Few-Shot Prompting** y **ReAct**.
 
+📖 **Lecturas sobre Context Engineering**:
+- [A Survey of Context Engineering for Large Language Models](https://arxiv.org/abs/2507.13334)
+- [Context Rot: How Increasing Input Tokens Impacts LLM Performance](https://research.trychroma.com/context-rot)
+- [How Long Contexts Fail](https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html)
+- [Why “Context Engineering” Matters](https://www.dbreunig.com/2025/07/24/why-the-term-context-engineering-matters.html)
+- [Optimizing LangChain AI Agents with Contextual Engineering](https://levelup.gitconnected.com/optimizing-langchain-ai-agents-with-contextual-engineering-0914d84601f3)
+
 🔧 **Librerías comunes**:
-- [DSPy](https://github.com/stanfordnlp/dspy) (Framework para context engineering basado en programas declarativos)
+- [DSPy](https://dspy.ai/) (Framework para context engineering basado en programas declarativos)
+    - [🐙 GitHub Repository](https://github.com/stanfordnlp/dspy) 
 - [Guidance](https://github.com/microsoft/guidance)
 - [Promptify](https://github.com/promptslab/Promptify)
 
@@ -101,7 +109,7 @@ Se utiliza para:
 - Adaptar el estilo o formato de salida.
 - Crear *instruction-tuned models* para casos concretos.
 
-🔧 **Librerías y frameworks**:
+### 🔧 Librerías y frameworks:
 - [Hugging Face Transformers](https://huggingface.co/transformers)
 - [PEFT](https://github.com/huggingface/peft) (Parameter Efficient Fine-Tuning)
 - [LoRA](https://github.com/microsoft/LoRA)
@@ -112,6 +120,103 @@ Se utiliza para:
     - [🤗 Hugging Face Organization Card](https://huggingface.co/unsloth)
 - [🦙 LLaMA-Factory](https://llamafactory.readthedocs.io/en/latest/)
     - [🐙 GitHub Repository](https://github.com/hiyouga/LLaMA-Factory)
+
+### 🪢 Datasets para entrenamiento y ajuste fino (Fine-Tuning) de LLMs:
+- [The Pile](https://pile.eleuther.ai/)
+- [HelpSteer: Helpfulness SteerLM Dataset](https://huggingface.co/datasets/nvidia/HelpSteer)
+- [No Robots](https://huggingface.co/datasets/HuggingFaceH4/no_robots)
+- [Anthropic_HH_Golden](https://huggingface.co/datasets/Unified-Language-Model-Alignment/Anthropic_HH_Golden)
+- [Trelis Function Calling Dataset](https://huggingface.co/datasets/Trelis/function_calling_extended)
+- [Dolma](https://huggingface.co/datasets/allenai/dolma)
+- [Open-Platypus](https://huggingface.co/datasets/garage-bAInd/Open-Platypus)
+- [Puffin](https://huggingface.co/datasets/LDJnr/Puffin)
+
+### 📄 Formatos para Fine Tuning: Alpaca vs ShareGPT
+
+Los formatos **Alpaca** y **ShareGPT** son los más utilizados para el fine‑tuning supervisado de LLMs, especialmente con frameworks como **LLaMA‑Factory** y **Unsloth**.
+
+#### 🧪 Formato Alpaca
+
+📂 Estructura típica (JSON)
+
+```json
+{
+  "instruction": "...",    
+  "input": "...",          
+  "output": "...",         
+  "system": "...",         
+  "history": [             
+    ["instrucción anterior", "respuesta anterior"]
+  ]
+}
+```
+
+- `instruction`: Pregunta o instrucción del humano (requerido).
+- `input`: Contexto adicional (opcional).
+- `output`: Respuesta esperada del modelo (requerido).
+- `system`: Mensaje del sistema (opcional).
+- `history`: Rondas anteriores en conversaciones multironda (opcional).
+
+##### ✅ Ventajas
+- Muy simple y ampliamente adoptado.
+- Ideal para datasets de instrucción-respuesta de una sola ronda.
+
+##### ⚠️ Limitaciones
+- No tiene estructura nativa para roles múltiples o multironda avanzada.
+- Se apoya en tokens de separación (`###` o EOS).
+
+
+#### 🧵 ShareGPT
+
+##### 📂 Estructura típica (JSON)
+
+```json
+{
+  "conversations": [
+    { "from": "human", "value": "…instrucción humana…" },
+    { "from": "gpt",   "value": "…respuesta del modelo…" },
+    { "from": "function_call", "value": "…argumentos de herramienta…" },
+    { "from": "observation",   "value": "…resultado de herramienta…" }
+  ],
+  "system": "...",
+  "tools": "..."
+}
+```
+
+- Permite múltiples roles: `human`, `gpt`, `function_call`, `observation`.
+- Diseñado para conversaciones multironda y llamadas a funciones.
+
+##### ✅ Ventajas
+- Soporta roles y contextos complejos.
+- Ideal para datasets de diálogo real y herramientas.
+
+##### ⚠️ Limitaciones
+- Más complejo de preparar que Alpaca Format.
+
+
+#### 📦 Soporte en Frameworks
+
+- **LLaMA‑Factory**: Soporta ambos formatos mediante configuración en `dataset_info.json`.
+- **Unsloth**:
+  - Permite convertir con `standardize_sharegpt()`.
+  - Ofrece `conversation_extension` para simular multironda desde Alpaca.
+
+
+#### 📊 Comparativa Rápida
+
+| Aspecto                  | Alpaca Format                         | ShareGPT Format                              |
+|--------------------------|----------------------------------------|----------------------------------------------|
+| Instrucción + respuesta  | ✅                                    | ✅                                           |
+| Multi-turno              | ⚠️ Opcional, sin estructura fija       | ✅ Nativo                                    |
+| Roles adicionales        | ❌                                     | ✅ function_call, observation, etc.          |
+| Complejidad              | 🔹 Baja                               | 🔹 Media-Alta                                |
+| Conversión disponible    | 🔸 Limitada                            | ✅ Via Unsloth                               |
+
+
+#### 🧠 ¿Cuál elegir?
+
+- **Alpaca** → Para datasets simples de instrucciones/respuestas.
+- **ShareGPT** → Para diálogos multironda, roles múltiples y escenarios con herramientas.
 
 ---
 
@@ -278,27 +383,34 @@ Permite crear voces sintéticas realistas en múltiples idiomas y estilos, siend
 - [🤗 Hugging Face Hub](https://huggingface.co/models) – Repositorio central de modelos preentrenados y datasets para IA generativa, NLP, visión y más.
 
 ### ⚙️ Frameworks y Librerías
+- [📈 Pydantic](https://docs.pydantic.dev/latest/) - La librería de validación de datos más utilizada en Python
+    - [🐙 GitHub Repository](https://github.com/pydantic/pydantic)
 - [🧪 LangChain](https://www.langchain.com/) – Orquestación de agentes y flujos con LLMs, APIs y herramientas externas.
 - [🔁 LangGraph](https://www.langgraph.dev/) – Framework para flujos conversacionales multiestado con LLMs.
 - [📦 LlamaIndex](https://www.llamaindex.ai/) – Framework para crear aplicaciones de RAG (Retrieval-Augmented Generation).
 - [🤗 Transformers (Hugging Face)](https://huggingface.co/docs/transformers/index) – Librería para el uso de modelos de lenguaje en Python.
 
-### Datasets para entrenamiento y ajuste fino (Fine-Tuning) de LLMs
-- [The Pile](https://pile.eleuther.ai/)
-- [HelpSteer: Helpfulness SteerLM Dataset](https://huggingface.co/datasets/nvidia/HelpSteer)
-- [No Robots](https://huggingface.co/datasets/HuggingFaceH4/no_robots)
-- [Anthropic_HH_Golden](https://huggingface.co/datasets/Unified-Language-Model-Alignment/Anthropic_HH_Golden)
-- [Trelis Function Calling Dataset](https://huggingface.co/datasets/Trelis/function_calling_extended)
-- [Dolma](https://huggingface.co/datasets/allenai/dolma)
-- [Open-Platypus](https://huggingface.co/datasets/garage-bAInd/Open-Platypus)
-- [Puffin](https://huggingface.co/datasets/LDJnr/Puffin)
-
 ### Personas de Interes
-- [Maxime Labonne]()
-    - [🐙 GitHub Repository](https://mlabonne.github.io/blog/)
+- [Jeremy Howard](https://jeremy.fast.ai/)
+    - [🐙 GitHub Repository](https://github.com/jph00)
+    - [🐙 Fast.ai GitHub Repository](https://github.com/fastai)
+    - [fast.ai—Making neural nets uncool again](https://www.fast.ai/)
+- [Maxime Labonne](https://mlabonne.github.io/blog/)
+    - [🐙 GitHub Repository](https://github.com/mlabonne)
     - [🤗 Hugging Face Page](https://huggingface.co/mlabonne)
     - [LLM Engineer's Handbook](https://github.com/PacktPublishing/LLM-Engineers-Handbook)
 - [Colin Kealty (Bartowski)](https://x.com/bartowski1182)
     - [🐙 GitHub Repository](https://github.com/bartowski1182)
     - [🤗 Hugging Face Page](https://huggingface.co/bartowski)
     - [🤗 Hugging Face LM Studio Community Page](https://huggingface.co/lmstudio-community)
+- [David Kim](https://x.com/interpreter_ai)
+    - [🐙 GitHub Repository](https://github.com/davidkimai)
+    - [🤗 Hugging Face Recursive Labs Page](https://huggingface.co/recursivelabsai)
+- [Drew Breunig](https://www.dbreunig.com/)
+
+
+
+dspy - .inspect_history()
+
+ShareGPT Format
+Alpaca Format (Llama)
