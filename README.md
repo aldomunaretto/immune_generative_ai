@@ -130,6 +130,8 @@ Se utiliza para:
 - [Dolma](https://huggingface.co/datasets/allenai/dolma)
 - [Open-Platypus](https://huggingface.co/datasets/garage-bAInd/Open-Platypus)
 - [Puffin](https://huggingface.co/datasets/LDJnr/Puffin)
+- [Alpaca](https://huggingface.co/datasets/tatsu-lab/alpaca)
+  - [🐙 GitHub Repository](https://github.com/tatsu-lab/stanford_alpaca)
 
 ### 📄 Formatos para Fine Tuning: Alpaca vs ShareGPT
 
@@ -217,6 +219,11 @@ Los formatos **Alpaca** y **ShareGPT** son los más utilizados para el fine‑tu
 
 - **Alpaca** → Para datasets simples de instrucciones/respuestas.
 - **ShareGPT** → Para diálogos multironda, roles múltiples y escenarios con herramientas.
+
+#### 📄 Lecturas:
+
+- [How to create a custom Alpaca instruction dataset for fine-tuning LLMs](https://zackproser.com/blog/how-to-create-a-custom-alpaca-dataset)
+
 
 ---
 
