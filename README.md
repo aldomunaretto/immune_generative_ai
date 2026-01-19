@@ -13,6 +13,13 @@ Este repositorio tiene como objetivo introducir los fundamentos de la **Intelige
 - [📝 Context Engineering](#-context-engineering)
 - [🎯 Fine-tuning](#-fine-tuning)
 - [📂 Retrieval-Augmented Generation (RAG)](#-retrieval-augmented-generation-rag)
+- [🧪 Evaluación y Métricas](#-evaluación-y-métricas)
+- [🔐 Seguridad, Alineación y Riesgos](#-seguridad-alineación-y-riesgos)
+- [💰 Optimización de Costos](#-optimización-de-costos)
+- [🛰️ Observabilidad y Trazabilidad](#-observabilidad-y-trazabilidad)
+- [🧪 Testing de Prompts](#-testing-de-prompts)
+- [🧵 Gestión de Contexto Extendido](#-gestión-de-contexto-extendido)
+- [🛣️ Roadmap de Aprendizaje Sugerido](#️-roadmap-de-aprendizaje-sugerido)
 - [🤗 Hugging Face](#-hugging-face)
 - [🧰 Ollama](#-ollama)
 - [🖥️ LM Studio](#-lm-studio)
@@ -47,17 +54,24 @@ Los **Large Language Models (LLMs)** son redes neuronales entrenadas con grandes
 
 A continuación se listan algunos de los principales proveedores que ofrecen LLMs accesibles mediante API o servicios cloud:
 
-| Proveedor       | Modelo Principal            | Plataforma/API                   |
-|------------------|-----------------------------|----------------------------------|
-| **OpenAI**       | GPT-4o, GPT-4, GPT-3.5       | https://platform.openai.com     |
-| **Anthropic**    | Claude 3                    | https://www.anthropic.com       |
-| **Google**       | Gemini 1.5                  | https://ai.google.dev           |
-| **Meta**         | LLaMA 4                     | https://ai.meta.com/llama       |
-| **Alibaba**      | Qwen 2                      | https://qwenlm.github.io        |
-| **DeepSeek AI**  | DeepSeek-V2, DeepSeek-Coder | https://deepseekcoder.github.io |
-| **Mistral**      | Mistral/Mixtral             | https://mistral.ai               |
-| **Cohere**       | Command-R+                  | https://cohere.com               |
-| **Amazon**       | Titan                       | https://aws.amazon.com/bedrock  |
+| Proveedor       | Modelos Destacados (2026)                              | Plataforma/API                   | Notas |
+|-----------------|--------------------------------------------------------|----------------------------------|-------|
+| **OpenAI**      | GPT-5.2, o3, o1-pro, GPT-4o                            | https://platform.openai.com      | Soporte multimodal, Realtime API |
+| **Anthropic**   | Claude 4.5 Opus (Thinking), Claude 4 Sonnet            | https://www.anthropic.com        | Foco en seguridad. Excelente en matices lingüísticos y razonamiento complejo con modo "Thinking". |
+| **Google**      | Gemini 3 Pro / Nano Banana / Veo3                      | https://ai.google.dev            | Contexto largo, multimodal nativo y foco en razonamiento + agentes. |
+| **Meta**        | Llama 4 Scout, Llama 4 Maverick (pesos + API)          | https://ai.meta.com/llama        | “Open-weight” (con condiciones de licencia), opción de self-hosting + acceso vía API.|
+| **Alibaba**     | Qwen3 (familia), Qwen3-Max, (línea Qwen3-Next)         | https://qwenlm.github.io         | Mucho empuje en modelos “hybrid reasoning” y escalado; Max aparece como tope de gama.|
+| **DeepSeek AI** | DeepSeek-V3.2, DeepSeek-R1                             | https://deepseekcoder.github.io  | Enfocado en razonamiento/código con releases frecuentes (V3.x) y línea R1. Especializado en código. |
+| **Mistral**     | Mistral Large 3, Mistral 3 (14B/8B/3B)                 | https://mistral.ai               | Oferta muy sólida en open models + opciones enterprise; nueva generación “Mistral 3”.|
+| **Cohere**      | Command A, Command R / R+.                             | https://cohere.com               | Orientado a enterprise + RAG + tool use; Cohere recomienda Command A como “latest” frente a R+. |
+| **AWS (Bedrock)**      | Amazon Nova (Premier/Pro/Lite/Micro), + Titan (embeddings / image / legacy text)   | https://aws.amazon.com/bedrock   | Nova es la línea moderna multimodal/agentic; Titan sigue presente (especialmente embeddings/imágenes) y parte de text se migra hacia Nova.|
+| **xAI** | Grok 4, Grok 3 | https://docs.x.ai/ | API con modelos versionados/aliases; Grok 4 aparece como oferta actual. |
+| **AI21 Labs** | Jamba, Jamba2| https://docs.ai21.com/ | Modelos basados en la línea Claude, con enfoque en NLP avanzado. |
+
+### 🚀 Tendencias Clave de 2026
+- Modelos de Razonamiento (Reasoning): Ya no solo predicen la siguiente palabra; modelos como o3 o Claude 4.5 Thinking utilizan "cadena de pensamiento" interna antes de responder, lo que reduce drásticamente las alucinaciones en tareas lógicas.
+- Agentes Nativos: La mayoría de los modelos actuales (especialmente Llama 4 y GPT-5.2) están diseñados para usar herramientas de forma autónoma, permitiendo crear flujos de trabajo sin intervención humana constante.
+- Eficiencia Extrema: Los modelos "Small" o "Flash" de 2026 son hoy más potentes de lo que era GPT-4 en su lanzamiento, permitiendo inferencia local en dispositivos con gran precisión.
 
 ---
 
@@ -91,13 +105,17 @@ Se centra en:
 - [Context Rot: How Increasing Input Tokens Impacts LLM Performance](https://research.trychroma.com/context-rot)
 - [How Long Contexts Fail](https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html)
 - [Why “Context Engineering” Matters](https://www.dbreunig.com/2025/07/24/why-the-term-context-engineering-matters.html)
+- [Context Engineering for Agents](https://blog.langchain.com/context-engineering-for-agents/)
 - [Optimizing LangChain AI Agents with Contextual Engineering](https://levelup.gitconnected.com/optimizing-langchain-ai-agents-with-contextual-engineering-0914d84601f3)
+- [Prompt Injection Exploits](https://blog.langchain.dev) (riesgos)
+- [Evaluation Harness for Prompts](https://github.com) (buscar frameworks)
 
 🔧 **Librerías comunes**:
 - [DSPy](https://dspy.ai/) (Framework para context engineering basado en programas declarativos)
     - [🐙 GitHub Repository](https://github.com/stanfordnlp/dspy) 
 - [Guidance](https://github.com/microsoft/guidance)
 - [Promptify](https://github.com/promptslab/Promptify)
+- [Promptfoo (testing)](https://github.com/promptfoo/promptfoo)
 
 ---
 
@@ -113,6 +131,7 @@ Se utiliza para:
 - [Hugging Face Transformers](https://huggingface.co/transformers)
 - [PEFT](https://github.com/huggingface/peft) (Parameter Efficient Fine-Tuning)
 - [LoRA](https://github.com/microsoft/LoRA)
+- [QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
 - [TRL (Transformer Reinforcement Learning)](https://github.com/huggingface/trl)
 - [H2O LLM Studio](https://github.com/h2oai/h2o-llmstudio)
 - [🦥 Unsloth](https://unsloth.ai/) (Framework optimizado para fine-tuning rápido y eficiente)
@@ -224,7 +243,6 @@ Los formatos **Alpaca** y **ShareGPT** son los más utilizados para el fine‑tu
 
 - [How to create a custom Alpaca instruction dataset for fine-tuning LLMs](https://zackproser.com/blog/how-to-create-a-custom-alpaca-dataset)
 
-
 ---
 
 ## 📂 Retrieval-Augmented Generation (RAG)
@@ -245,6 +263,125 @@ En lugar de confiar solo en el conocimiento interno del LLM, **recupera document
 - Chatbots empresariales con documentos privados.
 - Búsqueda semántica combinada con LLMs.
 - Sistemas de soporte y asistencia con información actualizada.
+
+**Estrategias avanzadas:**
+- Hybrid Search (BM25 + vector)
+- Re-rankers (Cross-Encoder, ColBERT)
+- Chunking adaptativo (basado en densidad semántica)
+- Caching semántico (embedding cache)
+- Context compression (resúmenes jerárquicos)
+
+---
+
+## 🧪 Evaluación y Métricas
+
+La evaluación consistente evita regresiones.
+
+Tipos:
+- Automática: BLEU, ROUGE (limitado), BERTScore, COMET.
+- Basada en LLM-as-a-Judge: pares A/B, escalas Likert.
+- Métricas específicas: 
+  - Context hit rate (RAG)
+  - Hallucination rate
+  - Latencia P50/P95/P99
+  - Costo por 1K tokens útiles
+  - Tasa de tool success (agentes)
+
+Herramientas:
+- [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-harness)
+- [Gaia / MMLU / GSM8K] (benchmarks)
+- [Promptfoo](https://github.com/promptfoo/promptfoo)
+- [WeightWatcher] (calidad modelos)
+
+---
+
+## 🔐 Seguridad, Alineación y Riesgos
+
+Aspectos:
+- Prompt Injection
+- Data Exfiltration
+- Jailbreaks
+- Leakage de PII
+- Output Filtering / Red Teaming
+
+Mitigaciones:
+- Sanitización de entradas
+- Separación de roles (system vs user)
+- Clasificadores de seguridad (moderation endpoints)
+- Guardrails: [NeMo Guardrails], [Guardrails-AI], [Azure Content Filters]
+
+---
+
+## 💰 Optimización de Costos
+
+Estrategias:
+- Seleccionar modelo por tarea (routing / cascadas)
+- Cuantización local (4-bit, QLoRA)
+- Prompt trimming y compresión semántica
+- Reutilizar embeddings (cache)
+- Streaming parcial
+- Batch inference
+
+KPIs:
+- Tokens por intención
+- Tokens contextuales redundantes
+- Costo por sesión resuelta
+
+---
+
+## 🛰️ Observabilidad y Trazabilidad
+
+Qué capturar:
+- Prompt final compilado
+- Versionado de plantillas
+- Latencia end-to-end
+- Tool calls y resultados
+- Evaluaciones post-hoc
+
+Herramientas:
+- [LangSmith], [Weights & Biases], [Arize](https://arize.com), [Helicone], [E2B sandbox], [PromptLayer]
+
+---
+
+## 🧪 Testing de Prompts
+
+Tipos:
+- Regresión (snapshot expected outputs)
+- Sensibilidad (mutaciones adversarias)
+- Robustez (ruido / reorder)
+- Factualidad (verificador externo)
+
+Pipeline:
+1. Dataset representativo
+2. Definición de aserciones (regex, JSON schema, LLM judge)
+3. Score agregado (>= umbral)
+4. Gate CI/CD
+
+---
+
+## 🧵 Gestión de Contexto Extendido
+
+Técnicas:
+- Chunking semántico adaptativo
+- Resúmenes jerárquicos (map → reduce → refine)
+- Sliding window + focal retrieval
+- Embedding + graph enrichment
+- Long-context distillation (partial fine-tune)
+
+Riesgos: context rot, dilución de señal, latencia.
+
+---
+
+## 🛣️ Roadmap de Aprendizaje Sugerido
+
+1. Fundamentos: prompts + inferencia local (Ollama)
+2. RAG básico
+3. Evaluación y métricas
+4. Fine-tuning PEFT
+5. Tool use / agentes
+6. Optimización costo-rendimiento
+7. Observabilidad + seguridad
+8. Orquestación avanzada (LangGraph / DSPy)
 
 ---
 
@@ -282,7 +419,7 @@ En lugar de confiar solo en el conocimiento interno del LLM, **recupera document
 ### 📖 Documentación y APIs
 
 - [Repositorio de GitHub](https://github.com/ollama/ollama)
-- [Documentación oficial de Ollama](https://github.com/ollama/ollama/tree/main/docss)
+- [Documentación oficial de Ollama](https://github.com/ollama/ollama/tree/main/docs)
 - [Guía de la API de Ollama](../../wiki/ollama_api)  
 - [SDK de Python para Ollama](../../wiki/ollama_python_sdk)
 - [Creación y uso de Modelfile en Ollama](../../wiki/ollama_modelfile)
@@ -396,6 +533,11 @@ Permite crear voces sintéticas realistas en múltiples idiomas y estilos, siend
 - [🔁 LangGraph](https://www.langgraph.dev/) – Framework para flujos conversacionales multiestado con LLMs.
 - [📦 LlamaIndex](https://www.llamaindex.ai/) – Framework para crear aplicaciones de RAG (Retrieval-Augmented Generation).
 - [🤗 Transformers (Hugging Face)](https://huggingface.co/docs/transformers/index) – Librería para el uso de modelos de lenguaje en Python.
+- [LangSmith](https://www.langchain.com/langsmith) – Observabilidad
+- [Helicone](https://www.helicone.ai/) – Logging de llamadas LLM
+- [Promptfoo](https://github.com/promptfoo/promptfoo) – Testing de prompts
+- [Guardrails AI](https://github.com/guardrails-ai/guardrails) – Validación estructural
+- [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) – Seguridad conversacional
 
 ### Personas de Interes
 - [Jeremy Howard](https://jeremy.fast.ai/)
