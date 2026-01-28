@@ -92,6 +92,119 @@ A continuación se listan algunos de los LLMs open source más destacados y actu
 
 ---
 
+## 📝 Prompt Engineering
+
+La ingeniería de prompts (Prompt Engineering) es el arte y la ciencia de diseñar entradas (prompts) para LLMs con el fin de obtener salidas más precisas, seguras y previsibles sin alterar los pesos del modelo. Combina diseño de instrucciones, estructuración del contexto, selección de ejemplos y restricciones de formato para alinear la respuesta con requisitos funcionales y de negocio.
+
+Técnicas comunes
+- Mensajes de sistema/rol: separar instrucciones de alto nivel (system) de la petición del usuario.
+- Zero‑shot vs Few‑shot: proporcionar 0 o varios ejemplos para guiar estilo y formato.
+- Prompt templates: plantillas parametrizables y versionadas.
+- Constraints estructurales: schema JSON, regex o formatos esperados para validar salidas.
+- Temperature / sampling: controlar creatividad vs determinismo.
+- Chain-of-Thought (CoT) y pasos intermedios: usar pasos explicativos controlados para tareas de razonamiento (con precaución).
+- Tool‑use / function calling: definir llamadas a herramientas y formatos de intercambio.
+- Robustness: testear contra prompt injection y entradas adversarias.
+
+Ejemplos prácticos
+
+- Zero‑shot (instrucción clara)
+```
+System: Eres un redactor técnico conciso.
+User: Resume el siguiente texto en 3 bullets con lenguaje para ejecutivos.
+[DOCUMENTO...]
+```
+
+- Few‑shot (estilo y formato)
+```
+User: Ejemplo 1:
+Input: ¿Qué es X?
+Output: X es... (1-2 frases)
+
+User: Ejemplo 2:
+Input: Cómo configurar Y?
+Output: 1) Paso A 2) Paso B
+
+User: Ahora haz lo mismo para: [nueva pregunta]
+```
+
+- Output estructurado (JSON schema)
+```
+System: Responde SOLO en JSON con campos: { "summary": string, "impact": "low|medium|high", "actions": [string] }
+User: Resume este informe y sugiere acciones.
+[INFORME...]
+```
+
+- Role play / persona
+```
+System: Eres un analista de seguridad con 10 años de experiencia.
+User: Identifica 3 riesgos clave y una mitigación por cada uno.
+```
+
+Buenas prácticas breves
+- Definir rol, objetivo, audiencia y formato (ROCE).
+- Proveer ejemplos representativos y contraejemplos.
+- Validar y testear con mutaciones adversarias.
+- Versionar templates y registrar prompt final utilizado en producción.
+- Preferir restricciones estructurales (JSON schema) en lugar de solo instrucciones abiertas.
+
+Lecturas y herramientas
+- [Prompt Engineering Guide](https://promptingguide.ai/)
+- [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models — Wei et al.](https://arxiv.org/pdf/2201.11903)
+- [Rebuff: Detecting Prompt Injection Attacks](https://www.blog.langchain.com/rebuff/)
+- [Guidance](https://github.com/guidance-ai/guidance)
+- [Promptfoo: LLM evals & red teaming](https://github.com/promptfoo/promptfoo)
+
+Referencias rápidas
+- Guidance, Promptfoo, Promptify — utilidades para crear, testar y versionar prompts.
+
+
+### ROCE — Framework para diseñar prompts
+
+ROCE es un acrónimo que resume cuatro elementos clave para construir prompts claros y efectivos al interactuar con LLMs:
+
+- R — Rol: indica la perspectiva o identidad del modelo (p. ej. "Eres un analista de seguridad senior").
+- O — Objetivo: define la meta concreta del prompt (p. ej. "Resumir los riesgos en 3 puntos accionables").
+- C — Contexto: aporta datos relevantes, restricciones y cualquier información necesaria (documentos, formato, audiencia).
+- E — Ejemplo: muestra ejemplos de entrada/salida o el formato deseado para guiar la respuesta.
+
+Por qué usar ROCE:
+- Aumenta la precisión y relevancia de las respuestas.
+- Reduce ambigüedad y alucinaciones.
+- Facilita respuestas con formato predecible y verificable.
+
+Plantilla rápida:
+
+```
+# ROLE
+Eres un [profesión/experto] con [N años] de experiencia en [área].
+Tu especialidad es [skill específico].
+
+# OBJECTIVE
+Tu tarea es [acción específica] que cumpla:
+- [Criterio 1 de éxito]
+- [Criterio 2 de éxito]
+- [Criterio 3 de éxito]
+
+# CONTEXT
+- Audiencia: [descripción detallada]
+- Formato: [estructura específica]
+- Tono: [estilo de comunicación]
+- Restricciones: [límites claros]
+- NO hacer: [prohibiciones explícitas]
+
+# EXAMPLE
+[Muestra concreta del output deseado]
+```
+
+Consejos prácticos:
+- Sé explícito y conciso en cada elemento.
+- Proporciona ejemplos representativos.
+- Itera: refina rol, contexto o ejemplos si la salida no coincide con lo esperado.
+- Combínalo con técnicas como few-shot, instrucciones de sistema y constraints (JSON schema, límites de tokens) para mayor robustez.
+
+---
+
 ## 📝 Context Engineering
 
 El **Context Engineering** consiste en diseñar cuidadosamente los *prompts* y la información de entrada para optimizar las respuestas de un LLM sin necesidad de modificar sus pesos. 
@@ -523,8 +636,10 @@ Permite crear voces sintéticas realistas en múltiples idiomas y estilos, siend
 ### 📚 Documentación y Comparativas
 
 - [🤗 Hugging Face Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) – Comparativa actualizada de modelos open-source.
-- [🧠 Awesome Open LLMs](https://github.com/Hannibal046/Awesome-LLMs) – Lista curada de modelos, datasets y herramientas.
 - [🤗 Hugging Face Hub](https://huggingface.co/models) – Repositorio central de modelos preentrenados y datasets para IA generativa, NLP, visión y más.
+- [🤗 Hugging Face Trending Papers](https://huggingface.co/papers/trending) - Lista de papers recientes en IA y machine learning.
+- [📝 The Gradient](https://thegradient.pub/) – Artículos y análisis sobre LLMs.
+- [🧠 Awesome LLM](https://github.com/Hannibal046/Awesome-LLM) – Lista curada de modelos, datasets y herramientas.
 
 ### ⚙️ Frameworks y Librerías
 - [📈 Pydantic](https://docs.pydantic.dev/latest/) - La librería de validación de datos más utilizada en Python
@@ -544,6 +659,12 @@ Permite crear voces sintéticas realistas en múltiples idiomas y estilos, siend
     - [🐙 GitHub Repository](https://github.com/jph00)
     - [🐙 Fast.ai GitHub Repository](https://github.com/fastai)
     - [fast.ai—Making neural nets uncool again](https://www.fast.ai/)
+- [Andrej Karpathy](https://karpathy.ai/)
+    - [🐙 GitHub Repository](https://github.com/karpathy)
+    - [🤗 Hugging Face Page](https://huggingface.co/karpathy)
+    - X.com: [@karpathy](https://x.com/karpathy)
+- [Sebastian Raschka](https://sebastianraschka.com/)
+    - X.com: [@rasbt](https://x.com/rasbt)
 - [Maxime Labonne](https://mlabonne.github.io/blog/)
     - [🐙 GitHub Repository](https://github.com/mlabonne)
     - [🤗 Hugging Face Page](https://huggingface.co/mlabonne)
@@ -556,3 +677,12 @@ Permite crear voces sintéticas realistas en múltiples idiomas y estilos, siend
     - [🐙 GitHub Repository](https://github.com/davidkimai)
     - [🤗 Hugging Face Recursive Labs Page](https://huggingface.co/recursivelabsai)
 - [Drew Breunig](https://www.dbreunig.com/)
+
+### Enlaces Útiles
+- [LLM Visualization](https://bbycroft.net/llm)
+- [BertViz Interactive Tutorial](https://colab.research.google.com/drive/1hXIQ77A4TYS4y3UthWF-Ci7V7vVUoxmQ)
+- nanoGPT: [🐙 GitHub Repository](https://github.com/karpathy/nanoGPT)
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [The Annotated Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html)
+- [Attention is All You Need (Vaswani et al., 2017)](https://arxiv.org/abs/1706.03762)
+- [The GAN Zoo](https://github.com/hindupuravinash/the-gan-zoo)

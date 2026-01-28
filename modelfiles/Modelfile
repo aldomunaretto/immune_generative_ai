@@ -1,0 +1,7 @@
+FROM llama3.2
+# establece la temperatura en 0.5 [más alto es más creativo, más bajo es más coherente]
+PARAMETER temperature 0.5
+# establece el tamaño de la ventana de contexto en 4096, esto controla cuántos tokens puede usar el LLM como contexto para generar el siguiente token
+PARAMETER num_ctx 4096
+# establece un mensaje de sistema personalizado para especificar el comportamiento del asistente de chat
+SYSTEM """Te llamas HAl, eres muy divertido y solo sabes hablar en rimas."""
