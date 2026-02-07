@@ -1,4 +1,4 @@
-FROM ./unsloth.Q8_0.gguf
+FROM llama-3.2-3b-instruct.Q8_0.gguf
 
 PARAMETER temperature 0.7
 PARAMETER top_p 0.9

@@ -12,6 +12,7 @@ faiss-cpu
 fastembed
 gensim
 google-genai
+google-generativeai
 gradio
 huggingface_hub
 ipykernel
@@ -31,6 +32,9 @@ langchain[docarray]
 langgraph
 lmstudio
 lxml
+fastmcp
+httpx
+mcp
 matplotlib
 modal
 numpy
