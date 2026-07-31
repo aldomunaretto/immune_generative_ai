@@ -1,0 +1,182 @@
+{
+  "descripcion": "Conjunto de evaluación para la sesión de RAG del Máster de IMMUNE. Corpus: documentación interna ficticia de la plataforma Helios (Nordia Bank).",
+  "version": "1.0",
+  "convenciones": {
+    "docs_relevantes": "Documentos que contienen la evidencia necesaria. Se usa para recall@k y MRR.",
+    "claves": "Cadenas que deben aparecer (normalizadas) en una respuesta correcta. Base de la métrica automática de exactitud.",
+    "tipo": "factual | tabla | multi_doc | lexica | trampa | no_respondible",
+    "no_respondible": "La respuesta correcta es reconocer que el corpus no contiene la información."
+  },
+  "preguntas": [
+    {
+      "id": "Q01",
+      "pregunta": "¿Durante cuánto tiempo se conservan los logs de auditoría de Helios?",
+      "respuesta_referencia": "400 días. Es un requisito supervisor y no pueden borrarse antes de ese plazo ni siquiera con el rol helios-admin.",
+      "docs_relevantes": ["02_politica_seguridad_accesos"],
+      "claves": ["400"],
+      "claves_prohibidas": ["90 días"],
+      "tipo": "trampa",
+      "nota_docente": "El runbook menciona 90 días para las fichas de incidencia. Un RAG naíf recupera ese fragmento y responde 90. Es el mejor ejemplo de la sesión sobre distractores semánticos."
+    },
+    {
+      "id": "Q02",
+      "pregunta": "¿Cuál es la retención de datos de la zona raw del lago?",
+      "respuesta_referencia": "30 días naturales. Se redujo desde 90 días en la revisión 4.0 por motivos de coste.",
+      "docs_relevantes": ["01_arquitectura_helios"],
+      "claves": ["30"],
+      "tipo": "tabla",
+      "nota_docente": "El dato está en una tabla y repetido en prosa. Buen caso para comparar chunking que parte tablas frente a chunking estructural."
+    },
+    {
+      "id": "Q03",
+      "pregunta": "¿Qué significa el código de error HLS-4093 y qué acción inmediata hay que tomar?",
+      "respuesta_referencia": "Cuota de peticiones agotada para un consumidor en Halo. Acción: confirmar el tier del consumidor y aplicar el procedimiento de ampliación temporal.",
+      "docs_relevantes": ["03_runbook_incidencias", "04_catalogo_apis_halo"],
+      "claves": ["cuota", "tier"],
+      "tipo": "lexica",
+      "nota_docente": "Consulta con identificador exacto. La búsqueda densa suele fallar y BM25 acierta a la primera: es el argumento a favor de la búsqueda híbrida."
+    },
+    {
+      "id": "Q04",
+      "pregunta": "¿Cuántas peticiones por minuto admite el tier Estándar de Halo?",
+      "respuesta_referencia": "300 peticiones por minuto.",
+      "docs_relevantes": ["04_catalogo_apis_halo"],
+      "claves": ["300"],
+      "tipo": "tabla"
+    },
+    {
+      "id": "Q05",
+      "pregunta": "¿Cuál es el precio unitario de una UCV en 2026?",
+      "respuesta_referencia": "0,042 € por vCPU y hora.",
+      "docs_relevantes": ["05_modelo_costes_chargeback"],
+      "claves": ["0,042"],
+      "tipo": "tabla"
+    },
+    {
+      "id": "Q06",
+      "pregunta": "¿Qué recargo aplica un consumidor de tier Crítico sobre las unidades de petición API?",
+      "respuesta_referencia": "Un recargo del 40% en concepto de capacidad reservada (el tier Avanzado aplica un 15%).",
+      "docs_relevantes": ["05_modelo_costes_chargeback"],
+      "claves": ["40"],
+      "tipo": "factual"
+    },
+    {
+      "id": "Q07",
+      "pregunta": "¿Por qué se descartó Amazon MSK frente a Kinesis en la arquitectura de Helios?",
+      "respuesta_referencia": "Por coste operativo, no por rendimiento: el equipo de plataforma es de 6 personas y MSK exigía administración dedicada de brokers. El coste anual estimado era un 34% superior incluyendo el esfuerzo operativo (ADR-014).",
+      "docs_relevantes": ["01_arquitectura_helios"],
+      "claves": ["operativo", "34"],
+      "tipo": "factual"
+    },
+    {
+      "id": "Q08",
+      "pregunta": "¿Qué latencia p99 se compromete en el feature store para inferencia en tiempo real?",
+      "respuesta_referencia": "25 milisegundos en el plano online de Aria.",
+      "docs_relevantes": ["01_arquitectura_helios", "03_runbook_incidencias"],
+      "claves": ["25"],
+      "tipo": "factual",
+      "nota_docente": "La pregunta dice 'feature store' y el documento dice 'Aria' o 'FSA'. Caso claro donde la búsqueda densa gana a la léxica: el inverso de Q03."
+    },
+    {
+      "id": "Q09",
+      "pregunta": "¿Cuál es el tiempo de respuesta comprometido para una incidencia P1 y en qué caso se escala al CISO?",
+      "respuesta_referencia": "15 minutos de tiempo de respuesta, con resolución objetivo de 4 horas. El escalado al CISO es inmediato si hay datos afectados.",
+      "docs_relevantes": ["03_runbook_incidencias"],
+      "claves": ["15", "datos"],
+      "tipo": "tabla"
+    },
+    {
+      "id": "Q10",
+      "pregunta": "¿Puedo construir un asistente RAG con un único índice compartido por todos los empleados sobre la documentación de Helios?",
+      "respuesta_referencia": "No. La política prohíbe expresamente un índice único consultable por todos si contiene documentos con niveles de acceso heterogéneos. El sistema debe heredar los permisos del usuario y comprobarlos en el momento de la recuperación, no solo en la capa de presentación.",
+      "docs_relevantes": ["02_politica_seguridad_accesos"],
+      "claves": ["permiso", "recuperación"],
+      "tipo": "factual",
+      "nota_docente": "Pregunta metacircular: el corpus contiene la norma que prohíbe hacer mal lo que estamos construyendo en clase. Úsala en el bloque de producción."
+    },
+    {
+      "id": "Q11",
+      "pregunta": "¿Hasta cuándo hay soporte para la API v2 y qué ocurre después de esa fecha?",
+      "respuesta_referencia": "Hasta el 30 de septiembre de 2026. A partir de esa fecha las llamadas devuelven HTTP 410 de forma permanente y no se conceden prórrogas individuales.",
+      "docs_relevantes": ["04_catalogo_apis_halo"],
+      "claves": ["septiembre", "410"],
+      "tipo": "tabla"
+    },
+    {
+      "id": "Q12",
+      "pregunta": "Un equipo de tier Estándar consume en un mes 5.000 UCV, 12 TB-mes en curated y 2.000.000 de llamadas a Halo. ¿Cuánto se le repercute antes del descuento por compromiso?",
+      "respuesta_referencia": "2.258,00 € (210 € de cómputo + 258 € de almacenamiento + 360 € de peticiones + 1.430 € de cuota fija de coste no atribuible; el tier Estándar no aplica recargo).",
+      "docs_relevantes": ["05_modelo_costes_chargeback"],
+      "claves": ["2.258", "1.430"],
+      "tipo": "tabla",
+      "nota_docente": "Requiere recuperar la tabla de precios y el apartado de ejemplo. Si el chunking parte la tabla, el modelo calcula mal con total aplomo."
+    },
+    {
+      "id": "Q13",
+      "pregunta": "¿Qué cambios incompatibles introduce la migración de la API v2 a v3?",
+      "respuesta_referencia": "Cinco: fechas de epoch en milisegundos a ISO-8601, paginación de offset/limit a cursor opaco, errores con cuerpo estructurado (code, message, trace_id), sustitución de customer_id por subject_token seudonimizado, y respuestas vacías con HTTP 200 en lugar de 404.",
+      "docs_relevantes": ["04_catalogo_apis_halo"],
+      "claves": ["cursor", "ISO-8601", "subject_token"],
+      "tipo": "factual"
+    },
+    {
+      "id": "Q14",
+      "pregunta": "¿En qué tier opera el dominio de Fraude y qué prioridad tiene si hay que limitar tráfico en Halo por saturación?",
+      "respuesta_referencia": "Opera en tier Crítico. En una contención por saturación nunca se limita a los consumidores del dominio de Fraude, que tienen prioridad absoluta por requisito regulatorio; el throttling empieza por los de tier básico.",
+      "docs_relevantes": ["04_catalogo_apis_halo", "03_runbook_incidencias"],
+      "claves": ["crítico", "nunca"],
+      "tipo": "multi_doc"
+    },
+    {
+      "id": "Q15",
+      "pregunta": "Necesito reprocesar la ingesta de hace 45 días con los datos originales. ¿Es posible?",
+      "respuesta_referencia": "No con los datos originales: la zona raw solo retiene 30 días. Fuera de esa ventana el reproceso debe partir de la zona curated, con la pérdida de fidelidad que ello implica.",
+      "docs_relevantes": ["01_arquitectura_helios", "03_runbook_incidencias"],
+      "claves": ["30", "curated"],
+      "tipo": "multi_doc"
+    },
+    {
+      "id": "Q16",
+      "pregunta": "¿Qué rol se necesita para consultar el log de auditoría y qué tipo de MFA se exige al rol helios-admin?",
+      "respuesta_referencia": "El rol helios-audit para consultar el log (y esas consultas quedan también registradas). helios-admin exige llave física FIDO2; la MFA por SMS no se acepta en ningún caso.",
+      "docs_relevantes": ["02_politica_seguridad_accesos"],
+      "claves": ["helios-audit", "FIDO2"],
+      "tipo": "factual"
+    },
+    {
+      "id": "Q17",
+      "pregunta": "¿Qué presupuesto tiene asignado la migración de Airflow 2.9 a 3.x?",
+      "respuesta_referencia": "Ninguno: la hoja de ruta indica expresamente que ninguna iniciativa de 2026 tiene todavía presupuesto asignado formalmente.",
+      "docs_relevantes": ["01_arquitectura_helios"],
+      "claves": ["ningun"],
+      "tipo": "trampa",
+      "nota_docente": "Parece no respondible pero sí lo es. Sirve para mostrar que un sistema demasiado conservador también falla: negarse no es gratis."
+    },
+    {
+      "id": "Q18",
+      "pregunta": "¿Qué SLA de disponibilidad ofrece Helios a sus clientes externos?",
+      "respuesta_referencia": "El corpus no permite responder: Helios no es una plataforma de cara a cliente, todos sus consumidores son internos. Existe un objetivo de 99,9% para Halo, pero es un compromiso interno.",
+      "docs_relevantes": [],
+      "claves": [],
+      "tipo": "no_respondible",
+      "nota_docente": "Premisa falsa incrustada en la pregunta. El fallo típico no es inventar el número, es aceptar la premisa."
+    },
+    {
+      "id": "Q19",
+      "pregunta": "¿Quién es el CISO de Nordia Bank?",
+      "respuesta_referencia": "El corpus no contiene esa información. El CISO se menciona en el procedimiento de escalado, pero nunca por su nombre.",
+      "docs_relevantes": [],
+      "claves": [],
+      "tipo": "no_respondible"
+    },
+    {
+      "id": "Q20",
+      "pregunta": "¿Cuál es el precio por millón de tokens de la pasarela Lumen?",
+      "respuesta_referencia": "El corpus no lo recoge: indica que Lumen se factura aparte con su propio catálogo de precios, pero no incluye ese catálogo.",
+      "docs_relevantes": [],
+      "claves": [],
+      "tipo": "no_respondible",
+      "nota_docente": "La pregunta recupera fragmentos muy relevantes que hablan del precio de Lumen sin darlo. Recuperación excelente y respuesta inventada: demuestra que recall alto no garantiza fidelidad."
+    }
+  ]
+}

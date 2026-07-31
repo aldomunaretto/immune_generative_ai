@@ -1,0 +1,14 @@
+# Interfaz
+streamlit>=1.49
+
+# API de Gemini (SDK unificado; NO el antiguo google-generativeai, que está obsoleto)
+google-genai>=2.0,<3.0
+
+# Configuración
+python-dotenv>=1.0
+
+# Núcleo RAG
+numpy>=1.26
+pandas>=2.0
+pypdf>=5.0
+rank-bm25>=0.2.2
